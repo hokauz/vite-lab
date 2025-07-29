@@ -1,0 +1,288 @@
+// ✅ tarefa concluída: Estilos SCSS do DataTable criados
+.data-table {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  &__container {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  &__header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+
+    &-row {
+      border: none;
+    }
+
+    &-cell {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      color: #495057;
+      border-bottom: 1px solid #dee2e6;
+      user-select: none;
+      position: relative;
+
+      &--sortable {
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: #e9ecef;
+        }
+      }
+
+      &-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+    }
+  }
+
+  &__sort-indicator {
+    font-size: 12px;
+    color: #6c757d;
+    transition: color 0.2s ease;
+
+    .data-table__header-cell--sortable:hover & {
+      color: #495057;
+    }
+  }
+
+  &__body {
+    background-color: white;
+  }
+
+  &__row {
+    border-bottom: 1px solid #dee2e6;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+
+    &--selected {
+      background-color: #e3f2fd;
+
+      &:hover {
+        background-color: #bbdefb;
+      }
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__cell {
+    padding: 12px 16px;
+    color: #212529;
+    vertical-align: middle;
+    word-wrap: break-word;
+  }
+
+  &__checkbox {
+    margin: 0;
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+
+  &__empty-message {
+    text-align: center;
+    padding: 32px 16px;
+    color: #6c757d;
+    font-style: italic;
+  }
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 16px;
+    color: #6c757d;
+  }
+
+  &__spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #dee2e6;
+    border-top: 3px solid #646cff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    &-info {
+      font-size: 14px;
+      color: #6c757d;
+
+      @media (max-width: 768px) {
+        text-align: center;
+      }
+    }
+
+    &-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+    }
+
+    &-button {
+      background: white;
+      border: 1px solid #dee2e6;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #495057;
+      transition: all 0.2s ease;
+      min-width: 36px;
+
+      &:hover:not(:disabled) {
+        background-color: #e9ecef;
+        border-color: #adb5bd;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: #f8f9fa;
+      }
+    }
+
+    &-current {
+      font-weight: 600;
+      color: #495057;
+      padding: 6px 12px;
+      background-color: white;
+      border: 1px solid #646cff;
+      border-radius: 4px;
+      min-width: 36px;
+      text-align: center;
+    }
+
+    &-size {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #495057;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+
+      label {
+        font-weight: 500;
+      }
+
+      select {
+        padding: 4px 8px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        background: white;
+        cursor: pointer;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #646cff;
+          box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.1);
+        }
+      }
+    }
+  }
+
+  &__selection-info {
+    padding: 12px 20px;
+    background-color: #e3f2fd;
+    border-top: 1px solid #bbdefb;
+    font-size: 14px;
+    color: #1565c0;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  // Responsividade para tabelas
+  @media (max-width: 768px) {
+    &__table {
+      font-size: 12px;
+    }
+
+    &__header-cell,
+    &__cell {
+      padding: 8px 12px;
+    }
+
+    &__container {
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  // Melhorias para acessibilidade
+  &__checkbox {
+    &:focus {
+      outline: 2px solid #646cff;
+      outline-offset: 2px;
+    }
+  }
+
+  &__header-cell--sortable {
+    &:focus {
+      outline: 2px solid #646cff;
+      outline-offset: -2px;
+    }
+  }
+
+  &__pagination-button {
+    &:focus {
+      outline: 2px solid #646cff;
+      outline-offset: 2px;
+    }
+  }
+}
