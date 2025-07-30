@@ -6,10 +6,15 @@ export interface CellRenderer<T = unknown> {
   (value: unknown, row: T, column: string): ReactNode;
 }
 
+// Interface para customização de headers
+export interface HeaderRenderer<T = unknown> {
+  (column: string, data?: T[]): ReactNode;
+}
+
 // Interface para definição de colunas
 export interface ColumnDef<T = unknown> {
   key: keyof T;
-  header: string;
+  header: string | HeaderRenderer<T>;
   width?: string;
   sortable?: boolean;
   renderer?: CellRenderer<T>;

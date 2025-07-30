@@ -1,2 +1,3 @@
 export { default as DataTable } from './DataTable';
-export * from './types';
+export { default as TableSkeleton } from './TableSkeleton';
+export type { DataTableProps, ColumnDef, CellRenderer, HeaderRenderer, PaginationConfig, RowSelection } from './types';

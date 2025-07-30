@@ -11,7 +11,8 @@ import {
   type SortingState,
   type RowSelectionState,
 } from '@tanstack/react-table';
-import type { DataTableProps } from './types';
+import type { DataTableProps, HeaderRenderer } from './types';
+import TableSkeleton from './TableSkeleton';
 import './DataTable.scss';
 
 function DataTable<T extends Record<string, unknown>>({
@@ -69,7 +70,8 @@ function DataTable<T extends Record<string, unknown>>({
     columns.forEach((col) => {
       cols.push({
         accessorKey: col.key as string,
-        header: col.header,
+        header:
+          typeof col.header === 'function' ? () => (col.header as HeaderRenderer<T>)(String(col.key)) : col.header,
         cell: ({ getValue, row }) => {
           const value = getValue();
           return col.renderer ? col.renderer(value, row.original, String(col.key)) : value;
@@ -123,12 +125,13 @@ function DataTable<T extends Record<string, unknown>>({
 
   if (loading) {
     return (
-      <div className={`data-table ${className}`}>
-        <div className='data-table__loading'>
-          <div className='data-table__spinner'></div>
-          <span>Carregando...</span>
-        </div>
-      </div>
+      <TableSkeleton
+        rows={pagination?.pageSize || 10}
+        columns={columns.length + (rowSelection ? 1 : 0)}
+        showHeader={true}
+        showPagination={!!pagination}
+        className={className}
+      />
     );
   }
 
